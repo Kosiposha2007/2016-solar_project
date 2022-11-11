@@ -100,7 +100,7 @@ def write_space_objects_data_to_file(output_filename, space_objects):
                                              obj.R, obj.color, obj.m,
                                              obj.x, obj.y, obj.Vx, obj.Vy))
 
-# FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл...
+# FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл... (всм как и зачем...)
 
 if __name__ == "__main__":
     print("This module is not for direct call!")
