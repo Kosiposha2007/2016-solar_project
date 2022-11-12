@@ -14,14 +14,15 @@ def calculate_force(body, space_objects):
     **space_objects** — список объектов, которые воздействуют на тело.
     """
 
-    body.Fx = body.Fy = 0
+    body.Fx = 0
+    body.Fy = 0
     for obj in space_objects:
-        if body == obj:
+        if body == obj or obj.type == 'planet':
             continue  # тело не действует гравитационной силой на само себя!
+            # а еще отключил взаимодействие с планетами. хз надо ли так
         r = ((body.x - obj.x)**2 + (body.y - obj.y)**2)**0.5
-        body.Fx = - gravitational_constant * body.m * obj.m * (body.x - obj.x) / r**3
-        body.Fy = - gravitational_constant * body.m * obj.m * (body.y - obj.y) / r**3
-        # FIXME: или тут не нужен минус?? проверим потом
+        body.Fx += - gravitational_constant * body.m * obj.m * (body.x - obj.x) / r**3
+        body.Fy += - gravitational_constant * body.m * obj.m * (body.y - obj.y) / r**3
 
 
 def move_space_object(body, dt):
