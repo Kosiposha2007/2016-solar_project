@@ -2,7 +2,7 @@
 # license: GPLv3
 
 import pygame as pg
-from solar_vis import *
+from solar_vis_pygame import *
 from solar_model import *
 from solar_input import *
 from solar_objects import *
