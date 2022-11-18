@@ -25,6 +25,8 @@ time_step = None
 space_objects = []
 """Список космических объектов."""
 
+out_filename = None
+
 
 def execution():
     """Функция исполнения -- выполняется циклически, вызывая обработку всех небесных тел,
@@ -39,6 +41,8 @@ def execution():
     for body in space_objects:
         update_object_position(space, body)
     physical_time += time_step.get()
+    if not out_filename == None:
+        write_statistics_to_file(out_filename, space_objects, physical_time)
     displayed_time.set("%.1f" % physical_time + " seconds gone")
 
     if perform_execution:
@@ -98,6 +102,7 @@ def save_file_dialog():
     функцию считывания параметров системы небесных тел из данного файла.
     Считанные объекты сохраняются в глобальный список space_objects
     """
+    global out_filename
     out_filename = asksaveasfilename(filetypes=(("Text file", ".txt"),))
     write_space_objects_data_to_file(out_filename, space_objects)
 
