@@ -100,7 +100,12 @@ def write_space_objects_data_to_file(output_filename, space_objects):
                                              obj.R, obj.color, obj.m,
                                              obj.x, obj.y, obj.Vx, obj.Vy))
 
-# FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл... (всм как и зачем...)
+def write_statistics_to_file(output_filename, space_objects, physical_time):
+    with open(output_filename, 'w') as out_file:
+        for obj in space_objects:
+            print(out_file, "%s %f %f %f %f %f" % (obj.type.capitalize(),
+                                             obj.x, obj.y, obj.Vx, obj.Vy, physical_time))
+
 
 if __name__ == "__main__":
     print("This module is not for direct call!")
