@@ -101,10 +101,36 @@ def write_space_objects_data_to_file(output_filename, space_objects):
                                              obj.x, obj.y, obj.Vx, obj.Vy))
 
 def write_statistics_to_file(output_filename, space_objects, physical_time):
-    with open(output_filename, 'w') as out_file:
+    with open(output_filename, 'a') as out_file:
         for obj in space_objects:
-            print(out_file, "%s %f %f %f %f %f" % (obj.type.capitalize(),
-                                             obj.x, obj.y, obj.Vx, obj.Vy, physical_time))
+            if obj.type == "planet":
+                out_file.write(str(obj.type.capitalize()) + " " + str(obj.x) + " " + str(obj.y) +
+                               " " + str(obj.Vx) + " " + str(obj.Vy) + " " + str(physical_time) + "\n")
+        out_file.close()
+
+import matplotlib.pyplot as plt
+
+def make_graphs_from_data(output_filename):
+    times = []
+    radii = []
+    velocities = []
+    with open(output_filename) as input_file:
+        for line in input_file:
+            x = float(line.split()[1])
+            y = float(line.split()[2])
+            vx = float(line.split()[3])
+            vy = float(line.split()[4])
+            time = float(line.split()[5])
+            times.append(time)
+            radii.append((x**2+y**2)**0.5)
+            velocities.append(((vx**2)+(vy**2))**0.5)
+    plt.plot(times, radii, 'b-')
+    plt.savefig('radii_over_time.png')
+    plt.plot(times, velocities, 'b-')
+    plt.savefig('velocities_over_time.png')
+    plt.plot(radii, velocities, 'b-')
+    plt.savefig('velocities_over_radii.png')
+
 
 
 if __name__ == "__main__":
