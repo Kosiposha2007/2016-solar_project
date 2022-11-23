@@ -36,13 +36,13 @@ def execution():
     """
     global physical_time
     global displayed_time
-    if not out_filename == None:
-        write_statistics_to_file(out_filename, space_objects, physical_time)
     for i in range(100):
         recalculate_space_objects_positions(space_objects, time_step.get()/100)
     for body in space_objects:
         update_object_position(space, body)
     physical_time += time_step.get()
+    if not out_filename == None:
+        write_statistics_to_file(out_filename, space_objects, physical_time)
     displayed_time.set("%.1f" % physical_time + " seconds gone")
 
     if perform_execution:
