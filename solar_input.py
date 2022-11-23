@@ -126,10 +126,15 @@ def make_graphs_from_data(output_filename):
             velocities.append(((vx**2)+(vy**2))**0.5)
     plt.plot(times, radii, 'b-')
     plt.savefig('radii_over_time.png')
-    plt.plot(times, velocities, 'b-')
+    plt.clf()
+    plt.plot(times, velocities, 'r-')
     plt.savefig('velocities_over_time.png')
-    plt.plot(radii, velocities, 'b-')
+    plt.clf()
+    plt.plot(radii, velocities, 'g-')
     plt.savefig('velocities_over_radii.png')
+    plt.clf()
+    print(velocities)
+    print(times)
 
 
 
